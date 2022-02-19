@@ -107,12 +107,12 @@ const Navbar = () => {
             >
               English
             </a>
-            <Divider type="vertical" />
-            <a href="google.com" target="_blank">
-              <AiOutlineLogout />
-              Logout
-            </a>
           </Dropdown>
+          <Divider type="vertical" />
+          <a href="google.com" target="_blank">
+            <AiOutlineLogout />
+            Logout
+          </a>
         </Space>
       </div>
     </StyledNavbar>
