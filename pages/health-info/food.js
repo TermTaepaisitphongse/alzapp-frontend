@@ -1,6 +1,6 @@
 import { Row, Col } from "antd";
 import styled from "styled-components";
-import { StarOutlined } from "react-icons/ai";
+import { StarOutlined } from "@ant-design/icons";
 import Image from "next/image";
 
 const ContentWrapper = styled(Col)`
