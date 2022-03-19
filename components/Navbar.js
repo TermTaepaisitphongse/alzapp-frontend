@@ -2,11 +2,7 @@ import styled from "styled-components";
 import { Menu, Dropdown, Row, Col, Space, Divider, Grid } from "antd";
 import Link from "next/link";
 import { AiOutlineLogout } from "react-icons/ai";
-import {
-  AppstoreOutlined,
-  MailOutlined,
-  SettingOutlined,
-} from "@ant-design/icons";
+import { AppstoreOutlined } from "@ant-design/icons";
 
 const { useBreakpoint } = Grid;
 const StyledNavbar = styled.div`
@@ -27,53 +23,39 @@ const Navbar = () => {
   const Services = (
     <Menu>
       <Menu.Item>
-        <Link href="/medicalRecords">
-          <a target="_blank" rel="noopener noreferrer">
-            Medical Records
-          </a>
+        <Link href="/services/medical-records" passHref>
+          Medical Records
         </Link>
       </Menu.Item>
       <Menu.Item>
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.aliyun.com"
-        >
+        <Link href="/services/todo-list" passHref>
           To-Do List
-        </a>
+        </Link>
       </Menu.Item>
       <Menu.Item>
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.luohanacademy.com"
-        >
+        <Link href="/servies/calendar" passHref>
           Calendar
-        </a>
+        </Link>
       </Menu.Item>
-      <Menu.Item>Games</Menu.Item>
+      <Menu.Item>
+        <Link href="/services/games" passHref>
+          Games
+        </Link>
+      </Menu.Item>
     </Menu>
   );
 
   const AboutUs = (
     <Menu>
       <Menu.Item>
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.antgroup.com"
-        >
+        <Link href="/about-us/inspiration" passHref>
           Inspiration
-        </a>
+        </Link>
       </Menu.Item>
       <Menu.Item>
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.aliyun.com"
-        >
+        <Link href="/about-us/feedback" passHref>
           Feedback
-        </a>
+        </Link>
       </Menu.Item>
     </Menu>
   );
@@ -85,43 +67,61 @@ const Navbar = () => {
   if (screens.xs) {
     return (
       <div>
-        <Menu
-          style={{ width: 256 }}
-          defaultSelectedKeys={["1"]}
-          defaultOpenKeys={["sub1"]}
-          mode="inline"
-        >
-          <SubMenu key="sub1" icon={<MailOutlined />} title="Navigation One">
-            <Menu.ItemGroup key="g1" title="Item 1">
-              <Menu.Item key="1">Option 1</Menu.Item>
-              <Menu.Item key="2">Option 2</Menu.Item>
-            </Menu.ItemGroup>
-            <Menu.ItemGroup key="g2" title="Item 2">
-              <Menu.Item key="3">Option 3</Menu.Item>
-              <Menu.Item key="4">Option 4</Menu.Item>
-            </Menu.ItemGroup>
-          </SubMenu>
-          <SubMenu
-            key="sub2"
-            icon={<AppstoreOutlined />}
-            title="Navigation Two"
-          >
-            <Menu.Item key="5">Option 5</Menu.Item>
-            <Menu.Item key="6">Option 6</Menu.Item>
-            <SubMenu key="sub3" title="Submenu">
-              <Menu.Item key="7">Option 7</Menu.Item>
-              <Menu.Item key="8">Option 8</Menu.Item>
+        <Menu style={{ width: "100%" }} mode="inline">
+          <SubMenu key="main" icon={<AppstoreOutlined />} title="AlzApp">
+            <Menu.Item key="home">
+              <Link href="/" passHref>
+                <a>Home</a>
+              </Link>
+            </Menu.Item>
+            <SubMenu key="services" title="Services">
+              <Menu.Item key="1">
+                <Link href="/services/medical-records" passHref>
+                  <a>Medical Records</a>
+                </Link>
+              </Menu.Item>
+
+              <Menu.Item key="2">
+                <Link href="/services/todo-list" passHref>
+                  <a>To-Do List</a>
+                </Link>
+              </Menu.Item>
+
+              <Menu.Item key="3">
+                <Link href="/services/calendar" passHref>
+                  <a>Calendar</a>
+                </Link>
+              </Menu.Item>
+
+              <Menu.Item key="4">
+                <Link href="/services/games" passHref>
+                  <a>Games</a>
+                </Link>
+              </Menu.Item>
             </SubMenu>
-          </SubMenu>
-          <SubMenu
-            key="sub4"
-            icon={<SettingOutlined />}
-            title="Navigation Three"
-          >
-            <Menu.Item key="9">Option 9</Menu.Item>
-            <Menu.Item key="10">Option 10</Menu.Item>
-            <Menu.Item key="11">Option 11</Menu.Item>
-            <Menu.Item key="12">Option 12</Menu.Item>
+
+            <Menu.Item key="healthinformation">
+              <Link href="/health-info/" passHref>
+                <a>Health Information</a>
+              </Link>
+            </Menu.Item>
+
+            <SubMenu key="aboutus" title="About Us">
+              <Menu.Item key="5">
+                <Link href="/about-us/about-us" passHref>
+                  <a>About Us</a>
+                </Link>
+              </Menu.Item>
+
+              <Menu.Item key="6">
+                <Link href="/about-us/feedback" passHref>
+                  <a>Feedback</a>
+                </Link>
+              </Menu.Item>
+            </SubMenu>
+            <SubMenu key="language" title="English">
+              <Menu.Item key="7">Thai</Menu.Item>
+            </SubMenu>
           </SubMenu>
         </Menu>
       </div>
@@ -130,7 +130,9 @@ const Navbar = () => {
     return (
       <StyledNavbar>
         <div>
-          AlzApp
+          <Link href="/" passHref>
+            AlzApp
+          </Link>
           <Divider type="vertical" />
           <Space>
             <Dropdown overlay={Services}>
@@ -141,6 +143,10 @@ const Navbar = () => {
                 Services
               </a>
             </Dropdown>
+            <Divider type="vertical" />
+            <Link href="/health-info" passHref>
+              Health Informaion
+            </Link>
             <Divider type="vertical" />
             <Dropdown overlay={AboutUs}>
               <a
