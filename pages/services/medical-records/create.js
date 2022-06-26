@@ -13,11 +13,24 @@ import {
   Row,
   Col,
 } from "antd";
+import axios from "axios";
 
 export default function MedicalRecordsForm() {
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     console.log("data received!", values);
+    await saveMedicalRecard(values);
+    alert("saved!");
   };
+
+  const saveMedicalRecard = async (data) => {
+    const response = await axios({
+      method: "post",
+      url: "http://localhost:3001/medicalRecords",
+      data,
+    });
+    console.log("save records", response.data);
+  };
+
   return (
     <Row>
       <Col xs={24} md={{ span: 16, offset: 4 }}>
@@ -35,10 +48,13 @@ export default function MedicalRecordsForm() {
           >
             <DatePicker showTime format="YYYY-MM-DD HH:mm:ss" />
           </Form.Item>
-          <Form.Item label="Body Temperature (°C)" name="bodyTemperature">
+          <Form.Item label="Body Temperature (°C)" name="temperature">
             <InputNumber />
           </Form.Item>
-          <Form.Item label="Blood Pressure (mmHg)" name="bloodPressure">
+          <Form.Item label="Blood Pressure (SYS) (mmHg)" name="sys">
+            <InputNumber />
+          </Form.Item>
+          <Form.Item label="Blood Pressure (DIA) (mmHg)" name="dia">
             <InputNumber />
           </Form.Item>
           <Form.Item label="Pulse (BPM)" name="pulse">
@@ -47,7 +63,7 @@ export default function MedicalRecordsForm() {
           <Form.Item label="Respiratory rate" name="respiratoryRate">
             <InputNumber />
           </Form.Item>
-          <Form.Item label="DTX (mg%)" name="dtx">
+          <Form.Item label="DTX (mg%)" name="DTX">
             <InputNumber />
           </Form.Item>
           <Form.Item label="Notes/Symptoms" name="notes">

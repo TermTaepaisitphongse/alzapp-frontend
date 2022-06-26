@@ -10,6 +10,7 @@
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "antd": "4.3.0",
+    "axios": "^0.27.2",
     "cross-env": "^7.0.2",
     "dayjs": "1.8.28",
     "esm": "^3.2.25",

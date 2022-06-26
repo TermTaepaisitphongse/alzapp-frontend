@@ -1,88 +1,48 @@
 import styled from "styled-components";
 import { Row, Col, Table } from "antd";
 import Link from "next/link";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const columns = [
   {
-    title: "Name",
-    dataIndex: "name",
-    filters: [
-      {
-        text: "Joe",
-        value: "Joe",
-      },
-      {
-        text: "Jim",
-        value: "Jim",
-      },
-      {
-        text: "Submenu",
-        value: "Submenu",
-        children: [
-          {
-            text: "Green",
-            value: "Green",
-          },
-          {
-            text: "Black",
-            value: "Black",
-          },
-        ],
-      },
-    ],
-    // specify the condition of filtering result
-    // here is that finding the name started with `value`
-    onFilter: (value, record) => record.name.indexOf(value) === 0,
-    sorter: (a, b) => a.name.length - b.name.length,
-    sortDirections: ["descend"],
-  },
-  {
-    title: "Age",
-    dataIndex: "age",
+    title: "Temperature",
+    dataIndex: "temperature",
     defaultSortOrder: "descend",
-    sorter: (a, b) => a.age - b.age,
+    sorter: (a, b) => a.temperature - b.temperature,
   },
   {
-    title: "Address",
-    dataIndex: "address",
-    filters: [
-      {
-        text: "London",
-        value: "London",
-      },
-      {
-        text: "New York",
-        value: "New York",
-      },
-    ],
-    onFilter: (value, record) => record.address.indexOf(value) === 0,
-  },
-];
-
-const data = [
-  {
-    key: "1",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
+    title: "Blood Pressure",
+    dataIndex: "sys",
+    defaultSortOrder: "descend",
+    sorter: (a, b) => a.sys - b.sys,
+    render: (_, record) => {
+      return `${record.sys}/${record.dia}`;
+    },
   },
   {
-    key: "2",
-    name: "Jim Green",
-    age: 42,
-    address: "London No. 1 Lake Park",
+    title: "Pulse",
+    dataIndex: "pulse",
+    defaultSortOrder: "descend",
+    sorter: (a, b) => a.pulse - b.pulse,
   },
   {
-    key: "3",
-    name: "Joe Black",
-    age: 32,
-    address: "Sidney No. 1 Lake Park",
+    title: "Respiratory Rate",
+    dataIndex: "respiratoryRate",
+    defaultSortOrder: "descend",
+    sorter: (a, b) => a.respiratoryRate - b.respiratoryRate,
   },
   {
-    key: "4",
-    name: "Jim Red",
-    age: 32,
-    address: "London No. 2 Lake Park",
+    title: "DTX",
+    dataIndex: "DTX",
+    defaultSortOrder: "descend",
+    sorter: (a, b) => a.DTX - b.DTX,
+  },
+  {
+    title: "Notes",
+    dataIndex: "notes",
+    defaultSortOrder: "descend",
+    sorter: (a, b) => a.notes - b.notes,
   },
 ];
 
@@ -91,10 +51,21 @@ function onChange(pagination, filters, sorter, extra) {
 }
 
 export default function MedicalRecords() {
+  const [medicalRecords, setMedicalRecords] = useState([]);
+
+  useEffect(() => {
+    const getMedicalRecard = async () => {
+      const response = await axios("http://localhost:3001/medicalRecords");
+      console.log("get records", response);
+      setMedicalRecords(response.data);
+    };
+    getMedicalRecard();
+  }, []);
+
   return (
     <>
       <Row>
-        <Col>
+        <Col xs={24} sm={24} md={{ span: 16, offset: 4 }}>
           <h2>บันทึกสุขภาพ</h2>
           <Link href="/services/medical-records/create" passHref>
             บันทึกใหม่
@@ -102,8 +73,12 @@ export default function MedicalRecords() {
         </Col>
       </Row>
       <Row>
-        <Col>
-          <Table columns={columns} dataSource={data} onChange={onChange} />
+        <Col xs={24} sm={24} md={{ span: 16, offset: 4 }}>
+          <Table
+            columns={columns}
+            dataSource={medicalRecords}
+            onChange={onChange}
+          />
         </Col>
       </Row>
     </>

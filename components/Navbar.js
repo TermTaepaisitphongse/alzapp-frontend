@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Menu, Dropdown, Row, Col, Space, Divider, Grid } from "antd";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { AiOutlineLogout } from "react-icons/ai";
 import { AppstoreOutlined } from "@ant-design/icons";
 
@@ -20,6 +21,17 @@ const StyledNavbar = styled.div`
 `;
 
 const Navbar = () => {
+  const router = useRouter();
+  let token = "";
+  if (typeof localStorage !== "undefined") {
+    token = localStorage.getItem("alzapp_token");
+  }
+
+  const logout = () => {
+    localStorage.setItem("alzapp_token", "");
+    router.push("/");
+  };
+
   const Services = (
     <Menu>
       <Menu.Item>
@@ -33,7 +45,7 @@ const Navbar = () => {
         </Link>
       </Menu.Item>
       <Menu.Item>
-        <Link href="/servies/calendar" passHref>
+        <Link href="/services/calendar" passHref>
           Calendar
         </Link>
       </Menu.Item>
@@ -171,14 +183,27 @@ const Navbar = () => {
               </a>
             </Dropdown>
             <Divider type="vertical" />
-            <a
-              href="google.com"
-              target="_blank"
-              style={{ display: "flex", alignItems: "center" }}
-            >
-              <AiOutlineLogout style={{ marginRight: 4 }} />
-              Logout
-            </a>
+            {token !== "" ? (
+              <a
+                onClick={() => logout()}
+                passHref
+                style={{ display: "flex", alignItems: "center" }}
+              >
+                <AiOutlineLogout style={{ marginRight: 4 }} />
+                Logout
+              </a>
+            ) : (
+              <Link
+                href="/login"
+                passHref
+                style={{ display: "flex", alignItems: "center" }}
+              >
+                <a>
+                  <AiOutlineLogout style={{ marginRight: 4 }} />
+                  Login
+                </a>
+              </Link>
+            )}
           </Space>
         </div>
       </StyledNavbar>
