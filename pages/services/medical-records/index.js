@@ -3,6 +3,7 @@ import { Row, Col, Table } from "antd";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { ALZAPP_API_URL } from "../../../config";
 
 const columns = [
   {
@@ -55,7 +56,7 @@ export default function MedicalRecords() {
 
   useEffect(() => {
     const getMedicalRecard = async () => {
-      const response = await axios("http://localhost:3001/medicalRecords");
+      const response = await axios(`${ALZAPP_API_URL}/medicalRecords`);
       console.log("get records", response);
       setMedicalRecords(response.data);
     };

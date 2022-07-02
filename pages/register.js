@@ -12,6 +12,7 @@ import {
 } from "antd";
 import { useState } from "react";
 import axios from "axios";
+import { ALZAPP_API_URL } from "../config";
 
 const { Option } = Select;
 const formItemLayout = {
@@ -56,7 +57,7 @@ const App = () => {
   const createNewUser = async (data) => {
     const response = await axios({
       method: "post",
-      url: "http://localhost:3001/users",
+      url: `${ALZAPP_API_URL}/users`,
       data,
     });
     console.log("save user", response.data);

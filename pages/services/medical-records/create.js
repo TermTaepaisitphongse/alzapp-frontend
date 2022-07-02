@@ -14,6 +14,7 @@ import {
   Col,
 } from "antd";
 import axios from "axios";
+import { ALZAPP_API_URL } from "../../../config";
 
 export default function MedicalRecordsForm() {
   const onFinish = async (values) => {
@@ -25,7 +26,7 @@ export default function MedicalRecordsForm() {
   const saveMedicalRecard = async (data) => {
     const response = await axios({
       method: "post",
-      url: "http://localhost:3001/medicalRecords",
+      url: `${ALZAPP_API_URL}/medicalRecords`,
       data,
     });
     console.log("save records", response.data);

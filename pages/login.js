@@ -1,6 +1,7 @@
 import { Button, Checkbox, Form, Input, Row, Col } from "antd";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { ALZAPP_API_URL } from "../config";
 
 const App = () => {
   const router = useRouter();
@@ -12,7 +13,7 @@ const App = () => {
   const login = async (data) => {
     const response = await axios({
       method: "post",
-      url: "http://localhost:3001/auth/login",
+      url: `${ALZAPP_API_URL}/auth/login`,
       data,
     });
     console.log("login", response.data);
