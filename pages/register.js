@@ -10,6 +10,7 @@ import {
   Row,
   Select,
 } from "antd";
+import Link from "next/link";
 import { useState } from "react";
 import axios from "axios";
 import { ALZAPP_API_URL } from "../config";
@@ -170,10 +171,24 @@ const App = () => {
           I have read the <a href="">agreement</a>
         </Checkbox>
       </Form.Item>
-      <Form.Item {...tailFormItemLayout}>
-        <Button type="primary" htmlType="submit">
-          Register
-        </Button>
+      <Form.Item
+        {...tailFormItemLayout}
+        wrapperCol={{
+          offset: 8,
+          span: 16,
+        }}
+      >
+        <div>
+          <Button type="primary" htmlType="submit">
+            Register
+          </Button>
+          <div style={{ display: "inline", marginRight: 4 }}>
+            already have an account?
+            <Link href="/login" passHref>
+              Login
+            </Link>
+          </div>
+        </div>
       </Form.Item>
     </Form>
   );

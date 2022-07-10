@@ -55,10 +55,12 @@ export default function Home() {
           </Link>
         </Col>
         <Col xs={24} md={8}>
-          <InfoCard>
-            <RiServiceFill size={200} style={{ color: "#4A6FA5" }} />
-            <p>About Us</p>
-          </InfoCard>
+          <Link href="about-us" passHref>
+            <InfoCard>
+              <RiServiceFill size={200} style={{ color: "#4A6FA5" }} />
+              <p>About Us</p>
+            </InfoCard>
+          </Link>
         </Col>
       </Row>
     </>

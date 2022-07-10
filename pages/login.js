@@ -1,4 +1,5 @@
-import { Button, Checkbox, Form, Input, Row, Col } from "antd";
+import { Button, Form, Input, Row, Col } from "antd";
+import Link from "next/link";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { ALZAPP_API_URL } from "../config";
@@ -72,16 +73,25 @@ const App = () => {
       >
         <Input.Password />
       </Form.Item>
-
+      {/* <Row>
+        <Col sm={{ offset: 8 }}> */}
       <Form.Item
         wrapperCol={{
           offset: 8,
           span: 16,
         }}
       >
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
+        <div>
+          <Button type="primary" htmlType="submit" style={{ marginRight: 8 }}>
+            Submit
+          </Button>
+          <div style={{ display: "inline", marginRight: 4 }}>
+            doesnt have an account?
+            <Link href="/register" passHref>
+              Register
+            </Link>
+          </div>
+        </div>
       </Form.Item>
     </Form>
   );
