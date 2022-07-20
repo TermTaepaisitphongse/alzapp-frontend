@@ -8,14 +8,19 @@ const StyleImage = styled.div`
   background-image: url(/homepage-image.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-  width: 100px;
+  width: 100%;
+  height: 100%;
 `;
 
 const App = () => (
-  <Typography>
-    <Title level={3}>เกี่ยวกับเรา</Title>
-    <Row>
-      <Col>
+  <Row>
+    <Col
+      xs={{ span: 24 }}
+      md={{ span: 8, offset: 4 }}
+      style={{ paddingTop: 64 }}
+    >
+      <Typography>
+        <Title level={3}>เกี่ยวกับเรา</Title>
         <Row>
           <Title>เรื่องราวของ AlzApp</Title>
         </Row>
@@ -61,12 +66,12 @@ const App = () => (
             </ul>
           </Paragraph>
         </Row>
-      </Col>
-      <Col>
-        <StyleImage />
-      </Col>
-    </Row>
-  </Typography>
+      </Typography>
+    </Col>
+    <Col xs={{ span: 24 }} md={{ span: 8 }} style={{ padding: 16 }}>
+      <StyleImage />
+    </Col>
+  </Row>
 );
 
 export default App;
